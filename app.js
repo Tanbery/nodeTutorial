@@ -1,6 +1,6 @@
-const express  = require("express");
-const app = express();
-const mng = require("mongoose");
+const express   = require("express");
+const app       = express();
+const mng       = require("mongoose");
 
 require("dotenv/config");
 const postRouter = require("./routes/posts")
@@ -9,7 +9,6 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use("/posts", postRouter);
 
-//Get, Post, Delete
 app.get("/",(req,res) => {
     res.send("We are at post")
 });
@@ -22,4 +21,7 @@ mng.connect(process.env.DB_CONNECTION,
 
 
 //Listen 
-app.listen(3000);
+const portNumber = process.env.SERVER_PORT || 3000;
+app.listen(portNumber);
+
+console.log(`Server is started to listening ${portNumber}`);
